@@ -453,35 +453,35 @@ if __name__ == "__main__":
 		gx2 = discriminantFunctions(setosaTestData[i], versicolorMeanVector, versicolorCovarianceMatrix, versicolorVi0)
 		gx3 = discriminantFunctions(setosaTestData[i], virginicaMeanVector, virginicaCovarianceMatrix, virginicaVi0)
 		
-		if max([gx1, gx2, gx3]) == gx1:
-			confusionMatrix[0][0] += 1
-		elif max([gx1, gx2, gx3]) == gx2:
+		if gx1 - gx2 < 0:
 			confusionMatrix[0][1] += 1
-		elif max([gx1, gx2, gx3]) == gx3:
+		elif gx1 - gx3 < 0:
 			confusionMatrix[0][2] += 1
+		else:
+			confusionMatrix[0][0] += 1
 
 	for i in range(0, len(versicolorTestData)):
 		gx1 = discriminantFunctions(versicolorTestData[i], setosaMeanVector, setosaCovarianceMatrix, setosaVi0)
 		gx2 = discriminantFunctions(versicolorTestData[i], versicolorMeanVector, versicolorCovarianceMatrix, versicolorVi0)
 		gx3 = discriminantFunctions(versicolorTestData[i], virginicaMeanVector, virginicaCovarianceMatrix, virginicaVi0)
 		
-		if max([gx1, gx2, gx3]) == gx1:
+		if gx2 - gx1 < 0:
 			confusionMatrix[1][0] += 1
-		elif max([gx1, gx2, gx3]) == gx2:
-			confusionMatrix[1][1] += 1
-		elif max([gx1, gx2, gx3]) == gx3:
+		elif gx2 - gx3 < 0:
 			confusionMatrix[1][2] += 1
+		else:
+			confusionMatrix[1][1] += 1
 
 	for i in range(0, len(virginicaTestData)):
 		gx1 = discriminantFunctions(virginicaTestData[i], setosaMeanVector, setosaCovarianceMatrix, setosaVi0)
 		gx2 = discriminantFunctions(virginicaTestData[i], versicolorMeanVector, versicolorCovarianceMatrix, versicolorVi0)
 		gx3 = discriminantFunctions(virginicaTestData[i], virginicaMeanVector, virginicaCovarianceMatrix, virginicaVi0)
 		
-		if max([gx1, gx2, gx3]) == gx1:
+		if gx3 - gx1 < 0:
 			confusionMatrix[2][0] += 1
-		elif max([gx1, gx2, gx3]) == gx2:
+		elif gx3 - gx2 < 0:
 			confusionMatrix[2][1] += 1
-		elif max([gx1, gx2, gx3]) == gx3:
+		else:
 			confusionMatrix[2][2] += 1
 
 	print("----confusion Matrix----")
